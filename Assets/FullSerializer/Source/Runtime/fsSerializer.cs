@@ -783,6 +783,7 @@ namespace FullSerializer {
             if (IsObjectReference(data)) {
                 int refId = int.Parse(data.AsDictionary[Key_ObjectReference].AsString);
                 result = _references.GetReferenceObject(refId);
+                if (result == null) throw new Exception("Failed to find type for id " + refId);
                 processors = GetProcessors(result.GetType());
                 return fsResult.Success;
             }
